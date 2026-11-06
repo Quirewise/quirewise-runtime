@@ -1,8 +1,14 @@
 cmake_minimum_required(VERSION 3.21)
 project(QuirewiseRuntime VERSION 0.1.0 LANGUAGES C)
+option(QUIREWISE_BUILD_SHARED "Build Quirewise libraries as shared libraries" OFF)
+if(QUIREWISE_BUILD_SHARED)
+    set(QW_LIBRARY_TYPE SHARED)
+else()
+    set(QW_LIBRARY_TYPE STATIC)
+endif()
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
-add_library(quirewise_runtime STATIC src/runtime.c)
+add_library(quirewise_runtime ${QW_LIBRARY_TYPE} src/runtime.c)
 add_library(Quirewise::Runtime ALIAS quirewise_runtime)
 set_target_properties(quirewise_runtime PROPERTIES EXPORT_NAME Runtime POSITION_INDEPENDENT_CODE ON)
 target_compile_features(quirewise_runtime PUBLIC c_std_11)
@@ -13,3 +19,9 @@ install(EXPORT QuirewiseRuntimeTargets FILE QuirewiseRuntimeTargets.cmake NAMESP
 configure_package_config_file(cmake/QuirewiseRuntimeConfig.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/QuirewiseRuntimeConfig.cmake" INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/QuirewiseRuntime")
 write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/QuirewiseRuntimeConfigVersion.cmake" VERSION "${PROJECT_VERSION}" COMPATIBILITY SameMajorVersion)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/QuirewiseRuntimeConfig.cmake" "${CMAKE_CURRENT_BINARY_DIR}/QuirewiseRuntimeConfigVersion.cmake" DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/QuirewiseRuntime")
+
+if(QUIREWISE_BUILD_SHARED AND WIN32)
+    set_target_properties(
+        quirewise_runtime
+        PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif()
