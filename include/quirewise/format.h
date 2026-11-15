@@ -250,6 +250,7 @@ typedef struct QwConvertOptions {
     int scan_perspective;      /* Correct a confidently detected page quadrilateral */
     int scan_dewarp;           /* Flatten text-line curvature when profile confidence is high */
     const char *qmc_ekey_db_path; /* Optional QQ player_process_db for QMC */
+    const char *pdf_password;  /* Optional user password for encrypted PDF input */
 } QwConvertOptions;
 
 typedef enum QwConvertStage {
@@ -263,7 +264,8 @@ typedef enum QwConvertStage {
 
 #define QW_CONVERT_OPTIONS_INIT \
     { 0, QW_PDFA_NONE, 0, NULL, 0, NULL, \
-      QW_SCAN_BINARIZE_NONE, 0, 0, 0, 0, 0, 0, QW_SCAN_SPLIT_NONE, 0, 0, 0, NULL }
+      QW_SCAN_BINARIZE_NONE, 0, 0, 0, 0, 0, 0, QW_SCAN_SPLIT_NONE, 0, 0, 0, NULL, \
+      NULL }
 
 typedef struct QwConvertReport {
     QwInputFormat format;
