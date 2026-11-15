@@ -203,6 +203,9 @@ typedef enum QwFormatId {
     QW_FORMAT_CBZ,
     /* Comic Book TAR packages one PNG image per page. */
     QW_FORMAT_CBT,
+    /* MDict dictionary text (MDX) and its resource companion (MDD). */
+    QW_FORMAT_MDX,
+    QW_FORMAT_MDD,
     QW_FORMAT_COUNT
 } QwFormatId;
 
