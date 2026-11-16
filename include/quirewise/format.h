@@ -253,6 +253,12 @@ typedef struct QwConvertOptions {
     const char *pdf_password;  /* Optional user password for encrypted PDF input */
     const char *mdd_path;      /* Optional companion MDD resource file for MDX */
     const void *mdd_resources; /* Internal: parsed MDD document from mdd_path */
+    unsigned image_crop_left;  /* Pixels removed from the left edge */
+    unsigned image_crop_top;   /* Pixels removed from the top edge */
+    unsigned image_crop_right; /* Pixels removed from the right edge */
+    unsigned image_crop_bottom;/* Pixels removed from the bottom edge */
+    unsigned image_resize_width;  /* Target width; 0 keeps the aspect ratio */
+    unsigned image_resize_height; /* Target height; 0 keeps the aspect ratio */
 } QwConvertOptions;
 
 typedef enum QwConvertStage {
@@ -267,7 +273,7 @@ typedef enum QwConvertStage {
 #define QW_CONVERT_OPTIONS_INIT \
     { 0, QW_PDFA_NONE, 0, NULL, 0, NULL, \
       QW_SCAN_BINARIZE_NONE, 0, 0, 0, 0, 0, 0, QW_SCAN_SPLIT_NONE, 0, 0, 0, NULL, \
-      NULL, NULL, NULL }
+      NULL, NULL, NULL, 0, 0, 0, 0, 0, 0 }
 
 typedef struct QwConvertReport {
     QwInputFormat format;
