@@ -260,6 +260,7 @@ typedef struct QwConvertOptions {
     unsigned image_resize_width;  /* Target width; 0 keeps the aspect ratio */
     unsigned image_resize_height; /* Target height; 0 keeps the aspect ratio */
     unsigned sheet_index;         /* Zero-based worksheet for CSV/TSV output */
+    const char *pdf_font_path;    /* Optional TrueType font embedded in PDF output */
 } QwConvertOptions;
 
 typedef enum QwConvertStage {
@@ -274,7 +275,7 @@ typedef enum QwConvertStage {
 #define QW_CONVERT_OPTIONS_INIT \
     { 0, QW_PDFA_NONE, 0, NULL, 0, NULL, \
       QW_SCAN_BINARIZE_NONE, 0, 0, 0, 0, 0, 0, QW_SCAN_SPLIT_NONE, 0, 0, 0, NULL, \
-      NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0 }
+      NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, NULL }
 
 typedef struct QwConvertReport {
     QwInputFormat format;
