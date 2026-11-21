@@ -262,6 +262,7 @@ typedef struct QwConvertOptions {
     unsigned sheet_index;         /* Zero-based worksheet for CSV/TSV output */
     const char *pdf_font_path;    /* Optional TrueType font embedded in PDF output */
     int pdf_office_reflow;        /* 1 = PDF -> DOCX/EPUB emits editable text, not page images */
+    int pdf_office_pages;         /* 1 = force page images even though editable text is the default */
 } QwConvertOptions;
 
 typedef enum QwConvertStage {
@@ -276,7 +277,7 @@ typedef enum QwConvertStage {
 #define QW_CONVERT_OPTIONS_INIT \
     { 0, QW_PDFA_NONE, 0, NULL, 0, NULL, \
       QW_SCAN_BINARIZE_NONE, 0, 0, 0, 0, 0, 0, QW_SCAN_SPLIT_NONE, 0, 0, 0, NULL, \
-      NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, NULL, 0 }
+      NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, NULL, 0, 0 }
 
 typedef struct QwConvertReport {
     QwInputFormat format;
